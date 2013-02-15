@@ -1,0 +1,9 @@
+* Thu Jan 31 2013 Li Zhang <li2012.zhang@samsung.com> submit/tizen_2.0/20130102.010626@7a7fec3
+- upload package
+- Fix package information
+- Support --no-configure in GBS
+- commit preedit string when reset
+- Remove anthy
+- upload japanese input method engine
+- Initial empty repository
+
