@@ -1,10 +1,11 @@
+#sbs-git:slp/pkgs/e/edje edje 1.1.0+svn.69011slp2+build03 96cd9783918ce594c786d12a5107be27aec4d34b
 Name:       ise-engine-anthy
 Summary:    Japanese input method
 Version:    0.0.0125
 Release:    1
-Group:      System/I18n/Japanese
-License:    GPL
-URL:        http://sourceforge.jp/projects/scim-imengine/
+Group:      TO_BE/FILLED_IN
+License:    BSD
+URL:        http://www.enlightenment.org/
 Source0:    %{name}-%{version}.tar.gz
 BuildRequires:  prelink
 BuildRequires:  gettext-tools
@@ -22,7 +23,7 @@ Ise-engine-anthy is ISF IMEngine module for Japanese input method base.It conver
 %setup -q
 
 %build
-%autogen
+./bootstrap
 %configure --prefix=%{_prefix} --disable-static
 
 make %{?jobs:-j%jobs}
