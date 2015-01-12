@@ -10,7 +10,7 @@ BuildRequires:  prelink
 BuildRequires:  gettext-tools
 BuildRequires:  pkgconfig(isf)
 BuildRequires:  pkgconfig(anthy)
-BuildRequires:  pkgconfig(ecore)
+BuildRequires:  pkgconfig(ecore-imf)
 
 %description
 ISF is an input service framework for TIZEN.
