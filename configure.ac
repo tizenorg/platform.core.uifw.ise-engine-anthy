@@ -123,6 +123,7 @@ AC_SUBST(SCIM_DEBUG_FLAGS)
 
 SCIM_DATADIR=`$PKG_CONFIG --variable=scimdatadir scim`
 SCIM_ICONDIR=`$PKG_CONFIG --variable=icondir scim`
+SCIM_PKGDIR=`$PKG_CONFIG --variable=pkgdir scim`
 SCIM_MODULEDIR=`$PKG_CONFIG --variable=moduledir scim`
 
 if test "x$SCIM_DATADIR" = "x"; then
@@ -133,6 +134,10 @@ if test "x$SCIM_ICONDIR" = "x"; then
   SCIM_ICONDIR=${datadir}/scim/icons
 fi
 
+if test "x$SCIM_PKGDIR" = "x"; then
+  SCIM_PKGDIR=${datadir}/packages
+fi
+
 if test "x$SCIM_MODULEDIR" = "x"; then
   SCIM_MODULEDIR=${libdir}/scim-1.0
 fi
@@ -141,6 +146,7 @@ SCIM_ANTHY_DATADIR=${SCIM_DATADIR}/Anthy
 
 AC_SUBST(SCIM_DATADIR)
 AC_SUBST(SCIM_ICONDIR)
+AC_SUBST(SCIM_PKGDIR)
 AC_SUBST(SCIM_MODULEDIR)
 AC_SUBST(SCIM_ANTHY_DATADIR)
         

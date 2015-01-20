@@ -39,5 +39,6 @@ cp COPYING %{buildroot}%{_datadir}/license/%{name}
 %{_datadir}/license/%{name}
 %{_datadir}/scim/icons/*
 %{_datadir}/locale/*
+%{_datadir}/packages/*
 %{_datadir}/scim/Anthy/*
 %{_libdir}/scim-1.0/1.4.0/IMEngine/*
