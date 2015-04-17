@@ -3,7 +3,7 @@ Summary:    Anthy (Japanese) Input Method Engine for ISF
 Version:    0.0.0125
 Release:    3
 Group:      Graphics & UI Framework/Input
-License:    LGPL-2.1+
+License:    GPL-2.0+
 URL:        http://sourceforge.jp/projects/scim-imengine/
 Source0:    %{name}-%{version}.tar.gz
 BuildRequires:  prelink
