@@ -33,6 +33,11 @@ mkdir -p %{buildroot}%{_datadir}/license
 cp COPYING %{buildroot}%{_datadir}/license/%{name}
 %make_install
 
+%post
+pkg_initdb
+
+%postun
+pkg_initdb
 
 %files
 %defattr(-,root,root,-)
