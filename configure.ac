@@ -1,16 +1,16 @@
 # Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.59)
 # base on scim-anthy-1.2.7
-AC_INIT(ise-engine-anthy, 0.0.0125, ashie@homa.ne.jp)
+AC_INIT(ise-engine-anthy, 1.0.0, ashie@homa.ne.jp)
 AC_CONFIG_SRCDIR([configure.ac])
 
 # Save this value here, since automake will set cflags and cxxflags later
 cflags_set=${CFLAGS+set}
 cppflags_set=${CPPFLAGS+set}
 
-SCIM_ANTHY_MAJOR_VERSION=0
+SCIM_ANTHY_MAJOR_VERSION=1
 SCIM_ANTHY_MINOR_VERSION=0
-SCIM_ANTHY_MICRO_VERSION=0125
+SCIM_ANTHY_MICRO_VERSION=0
 
 SCIM_ANTHY_VERSION=$SCIM_ANTHY_MAJOR_VERSION.$SCIM_ANTHY_MINOR_VERSION.$SCIM_ANTHY_MICRO_VERSION
 
