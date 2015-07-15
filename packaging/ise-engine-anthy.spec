@@ -40,6 +40,7 @@ pkg_initdb
 pkg_initdb
 
 %files
+%manifest %{name}.manifest
 %defattr(-,root,root,-)
 %{_datadir}/license/%{name}
 %{_datadir}/scim/icons/*
