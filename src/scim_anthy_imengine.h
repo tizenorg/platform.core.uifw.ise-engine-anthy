@@ -237,6 +237,7 @@ private:
 
     bool   is_single_segment                  (void);
     bool   is_realtime_conversion             (void);
+    void   show_symbols_lookup_table          (void);
 
 private: // FIXME!
     bool   is_nicola_thumb_shift_key          (const KeyEvent &key);
@@ -253,6 +254,7 @@ private:
     /* for candidates window */
     CommonLookupTable     m_lookup_table;
     bool                  m_lookup_table_visible;
+    CommonLookupTable    *m_common_lookup_table;
     unsigned int          m_n_conv_key_pressed;
 
     /* for toggling latin and wide latin */
