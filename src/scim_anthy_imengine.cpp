@@ -90,6 +90,8 @@
 #define UTF8_MIDDLE_DOT           "\xE3\x83\xBB"
 #define UTF8_SLASH_WIDE           "\xEF\xBC\x8F"
 
+static char g_common_symbol[]={'#','$','%','^','&','*','@'};
+
 AnthyInstance::AnthyInstance (AnthyFactory   *factory,
                               const String   &encoding,
                               int             id)
@@ -99,6 +101,7 @@ AnthyInstance::AnthyInstance (AnthyFactory   *factory,
       m_preedit                (*this),
       m_preedit_string_visible (false),
       m_lookup_table_visible   (false),
+      m_common_lookup_table    (0),
       m_n_conv_key_pressed     (0),
       m_prev_input_mode        (SCIM_ANTHY_MODE_HIRAGANA),
       m_conv_mode              (SCIM_ANTHY_CONVERSION_MULTI_SEGMENT),
@@ -107,10 +110,15 @@ AnthyInstance::AnthyInstance (AnthyFactory   *factory,
       m_layout                 (ECORE_IMF_INPUT_PANEL_LAYOUT_NORMAL)
 {
     SCIM_DEBUG_IMENGINE(1) << "Create Anthy Instance : ";
-
     reload_config (m_factory->m_config);
     m_factory->append_config_listener (this);
     m_on_init = false;
+    m_common_lookup_table = new CommonLookupTable();
+    for(int i = 0;i < sizeof(g_common_symbol)/sizeof(char);i++) {
+        char _str[2]={g_common_symbol[i],0};
+        m_common_lookup_table->append_candidate (utf8_mbstowcs ((const char*)_str));
+    }
+    
 }
 
 AnthyInstance::~AnthyInstance ()
@@ -119,6 +127,7 @@ AnthyInstance::~AnthyInstance ()
         stop_helper (String (SCIM_ANTHY_HELPER_UUID));
 
     m_factory->remove_config_listener (this);
+    delete m_common_lookup_table;
 }
 
 // FIXME!
@@ -152,7 +161,7 @@ AnthyInstance::process_key_event_input (const KeyEvent &key)
             update_lookup_table (table);
             show_lookup_table ();
         } else {
-            hide_lookup_table ();
+            show_symbols_lookup_table ();
         }
     }
 
@@ -321,7 +330,7 @@ AnthyInstance::process_key_event (const KeyEvent& key)
         if (process_key_event_input (key))
             return true;
     }
-
+    show_symbols_lookup_table ();
     if (m_preedit.is_preediting ())
         return true;
     else
@@ -363,6 +372,18 @@ void
 AnthyInstance::select_candidate (unsigned int item)
 {
     SCIM_DEBUG_IMENGINE(2) << "select_candidate.\n";
+    if (!(m_lookup_table_visible && is_selecting_candidates ())) {
+        if (m_preedit.get_length () > 0) {
+            commit_string (m_preedit.get_string ());
+            flush ();
+            return;
+        }
+        if (item < sizeof (g_common_symbol)/sizeof (char)) {
+            char _str[2] = {g_common_symbol[item], 0};
+            commit_string (utf8_mbstowcs (_str));
+            return;
+        }
+    }
 
     select_candidate_no_direct (item);
 
@@ -466,7 +487,7 @@ AnthyInstance::focus_in ()
         show_lookup_table ();
     } else {
         hide_aux_string ();
-        hide_lookup_table ();
+        show_symbols_lookup_table ();
     }
 
     install_properties ();
@@ -564,7 +585,7 @@ AnthyInstance::set_lookup_table (void)
             show_aux_string ();
         }
     } else if (!m_lookup_table_visible) {
-        hide_lookup_table ();
+        show_symbols_lookup_table ();
     }
 }
 
@@ -572,7 +593,8 @@ void
 AnthyInstance::unset_lookup_table (void)
 {
     m_lookup_table.clear ();
-    hide_lookup_table ();
+    show_symbols_lookup_table ();
+
     m_lookup_table_visible = false;
     m_n_conv_key_pressed = 0;
 
@@ -2383,6 +2405,21 @@ AnthyInstance::is_realtime_conversion (void)
         return true;
     else
         return false;
+}
+
+void
+AnthyInstance::show_symbols_lookup_table (void)
+{
+    if (!(m_lookup_table_visible && is_selecting_candidates ()))  {
+        if (m_preedit.get_length () > 0) {
+            CommonLookupTable     lookup_table;
+            lookup_table.append_candidate (m_preedit.get_string());
+            update_lookup_table (lookup_table);
+        }
+        else
+            update_lookup_table (*m_common_lookup_table);
+        show_lookup_table ();
+    }
 }
 
 int
