@@ -34,10 +34,8 @@ cp COPYING %{buildroot}%{_datadir}/license/%{name}
 %make_install
 
 %post
-pkg_initdb
 
 %postun
-pkg_initdb
 
 %files
 %manifest %{name}.manifest
