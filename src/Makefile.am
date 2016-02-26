@@ -80,8 +80,7 @@ ise_engine_anthy_la_LDFLAGS = \
 	-module \
 	@LIBTOOL_EXPORT_OPTIONS@ \
 	@SCIM_LIBS@ \
-	@ANTHY_LIBS@ \
-	@ECORE_IMF_LIBS@
+	@ANTHY_LIBS@
 
 
 #
