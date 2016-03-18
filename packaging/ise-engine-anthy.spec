@@ -17,11 +17,14 @@ ISF is an input service framework for TIZEN.
 ise-engine-anthy is ISF IMEngine module for Japanese input method base.It converts Hiragana text to Kana Kanji mixed text.
 
 
-
 %prep
 %setup -q
 
 %build
+export CFLAGS+=" -fvisibility=hidden -flto "
+export CXXFLAGS+=" -fvisibility=hidden -flto "
+export CPPFLAGS+=" -DEXPORTED=__attribute__\(\(visibility\(\\\"default\\\"\)\)\)"
+
 ./bootstrap
 %configure --prefix=%{_prefix} --disable-static
 

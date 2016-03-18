@@ -19,7 +19,7 @@
  */
 
 /*
- * The original code is scim_uim_imengine.cpp in scim-uim-0.1.3. 
+ * The original code is scim_uim_imengine.cpp in scim-uim-0.1.3.
  * Copyright (C) 2004 James Su <suzhe@tsinghua.org.cn>
  */
 

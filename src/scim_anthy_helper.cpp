@@ -73,7 +73,7 @@ std::map <int, TimeoutIDList> timeout_ids;
 
 //Module Interface
 extern "C" {
-    void scim_module_init (void)
+    EXPORTED void scim_module_init (void)
     {
         bindtextdomain (GETTEXT_PACKAGE, SCIM_ANTHY_LOCALEDIR);
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -83,25 +83,25 @@ extern "C" {
             _("A helper module for Anthy IMEngine."));
     }
 
-    void scim_module_exit (void)
+    EXPORTED void scim_module_exit (void)
     {
     }
 
-    unsigned int scim_helper_module_number_of_helpers (void)
+    EXPORTED unsigned int scim_helper_module_number_of_helpers (void)
     {
         return 1;
     }
 
-    bool scim_helper_module_get_helper_info (unsigned int idx, HelperInfo &info)
+    EXPORTED bool scim_helper_module_get_helper_info (unsigned int idx, HelperInfo &info)
     {
         if (idx == 0) {
-            info = helper_info; 
+            info = helper_info;
             return true;
         }
         return false;
     }
 
-    void scim_helper_module_run_helper (const String &uuid,
+    EXPORTED void scim_helper_module_run_helper (const String &uuid,
                                         const ConfigPointer &config,
                                         const String &display)
     {
@@ -238,7 +238,7 @@ run (const String &display, const ConfigPointer &config)
     argv [1] = "--display";
     argv [2] = const_cast<char *> (display.c_str ());
     argv [3] = 0;
- 
+
     setenv ("DISPLAY", display.c_str (), 1);
 
     gtk_init (&argc, &argv);

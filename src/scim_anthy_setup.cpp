@@ -94,47 +94,47 @@ const String __user_style_file_name =
 
 // Module Interface.
 extern "C" {
-    void scim_module_init (void)
+    EXPORTED void scim_module_init (void)
     {
         bindtextdomain (GETTEXT_PACKAGE, SCIM_ANTHY_LOCALEDIR);
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
     }
 
-    void scim_module_exit (void)
+    EXPORTED void scim_module_exit (void)
     {
     }
 
-    GtkWidget * scim_setup_module_create_ui (void)
+    EXPORTED GtkWidget * scim_setup_module_create_ui (void)
     {
         return create_setup_window ();
     }
 
-    String scim_setup_module_get_category (void)
+    EXPORTED String scim_setup_module_get_category (void)
     {
         return String ("IMEngine");
     }
 
-    String scim_setup_module_get_name (void)
+    EXPORTED String scim_setup_module_get_name (void)
     {
         return String (_("Anthy"));
     }
 
-    String scim_setup_module_get_description (void)
+    EXPORTED String scim_setup_module_get_description (void)
     {
         return String (_("An Anthy IMEngine Module."));
     }
 
-    void scim_setup_module_load_config (const ConfigPointer &config)
+    EXPORTED void scim_setup_module_load_config (const ConfigPointer &config)
     {
         load_config (config);
     }
 
-    void scim_setup_module_save_config (const ConfigPointer &config)
+    EXPORTED void scim_setup_module_save_config (const ConfigPointer &config)
     {
         save_config (config);
     }
 
-    bool scim_setup_module_query_changed ()
+    EXPORTED bool scim_setup_module_query_changed ()
     {
         return query_changed ();
     }
@@ -628,7 +628,7 @@ append_key_bindings (GtkTreeView *treeview, gint idx, const gchar *filter)
 {
     GtkListStore *store = GTK_LIST_STORE (gtk_tree_view_get_model (treeview));
     KeyEventList keys1, keys2;
-    
+
     if (filter && *filter)
         scim_string_to_key_list (keys1, filter);
 
@@ -1164,7 +1164,7 @@ create_toolbar_page (void)
 static GtkWidget *
 create_appearance_page (void)
 {
-    GtkWidget *vbox, *table, *omenu, *widget, *hbox; 
+    GtkWidget *vbox, *table, *omenu, *widget, *hbox;
 
     vbox = gtk_vbox_new (FALSE, 0);
     gtk_widget_show (vbox);
@@ -1500,7 +1500,7 @@ setup_widget_value (void)
             }
         }
     }
-    
+
     for (unsigned int i = 0; config_color_common[i].fg_key; i++) {
         ColorConfigData &entry = config_color_common[i];
         if (entry.widget) {

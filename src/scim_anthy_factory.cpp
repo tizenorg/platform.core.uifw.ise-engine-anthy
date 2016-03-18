@@ -19,7 +19,7 @@
  */
 
 /*
- * The original code is scim_uim_imengine.cpp in scim-uim-0.1.3. 
+ * The original code is scim_uim_imengine.cpp in scim-uim-0.1.3.
  * Copyright (C) 2004 James Su <suzhe@tsinghua.org.cn>
  */
 
@@ -56,19 +56,19 @@
 static ConfigPointer _scim_config (0);
 
 extern "C" {
-    void scim_module_init (void)
+    EXPORTED void scim_module_init (void)
     {
         bindtextdomain (GETTEXT_PACKAGE, SCIM_ANTHY_LOCALEDIR);
         bind_textdomain_codeset(GETTEXT_PACKAGE, "UTF-8");
     }
 
-    void scim_module_exit (void)
+    EXPORTED void scim_module_exit (void)
     {
         anthy_quit ();
         _scim_config.reset ();
     }
 
-    uint32 scim_imengine_module_init (const ConfigPointer &config)
+    EXPORTED uint32 scim_imengine_module_init (const ConfigPointer &config)
     {
         SCIM_DEBUG_IMENGINE(1) << "Initialize Anthy Engine.\n";
 
@@ -82,7 +82,7 @@ extern "C" {
         return 1;
     }
 
-    IMEngineFactoryPointer scim_imengine_module_create_factory (uint32 engine)
+    EXPORTED IMEngineFactoryPointer scim_imengine_module_create_factory (uint32 engine)
     {
         AnthyFactory *factory = 0;
 
@@ -188,7 +188,7 @@ AnthyFactory::get_name () const
 WideString
 AnthyFactory::get_authors () const
 {
-    const char *package = 
+    const char *package =
         PACKAGE "-" PACKAGE_VERSION "\n"
         "\n";
     const char *authors =
@@ -232,18 +232,18 @@ AnthyFactory::get_credits () const
 WideString
 AnthyFactory::get_help () const
 {
-    const char *title = 
+    const char *title =
         _("Basic operation:\n"
           "  \n");
 
-    const char *text1 = 
+    const char *text1 =
         _("1. Switch input mode:\n"
           "  You can switch on/off Japanese input mode by pressing Zenkaku_Hankaku key\n"
           "  or Control+J. Or you can rotate all input modes by pressing Control+,\n"
           "  (comma).\n"
           "  \n");
 
-    const char *text2 = 
+    const char *text2 =
         _("2. Input Japanese hiragana and katakana:\n"
           "  You can input Japanese hiragana and katakana by inputting romaji.\n"
           "  The Romaji table can be found out from the \"Anthy\" section of the setup\n"
@@ -252,7 +252,7 @@ AnthyFactory::get_help () const
           "  please press Alt + Romaji key or Conrol+\\ key to switch typing method.\n"
           "  \n");
 
-    const char *text3 = 
+    const char *text3 =
         _("3. Convert hiragana or katakana to Japanese kanji\n"
           "  After inputting hiragana or katakana, you can convert it to Japanese\n"
           "  kanji by pressing Space key. Then it will show some candidates. You can\n"
@@ -264,7 +264,7 @@ AnthyFactory::get_help () const
           "  right cursor key.\n"
           "  \n");
 
-    const char *text4 = 
+    const char *text4 =
         _("4. Other key bindings:\n"
           "  You can find out all key bindings definition of scim-anthy from \"Anthy\"\n"
           "  section on setup window of SCIM or SKIM.\n");
