@@ -21,8 +21,8 @@ ise-engine-anthy is ISF IMEngine module for Japanese input method base.It conver
 %setup -q
 
 %build
-export CFLAGS+=" -fvisibility=hidden -flto "
-export CXXFLAGS+=" -fvisibility=hidden -flto "
+export CFLAGS+=" -fvisibility=hidden "
+export CXXFLAGS+=" -fvisibility=hidden "
 export CPPFLAGS+=" -DEXPORTED=__attribute__\(\(visibility\(\\\"default\\\"\)\)\)"
 
 ./bootstrap
